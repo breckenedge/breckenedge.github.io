@@ -84,6 +84,9 @@ In the final step of the CICD pipeline above, Github SSHs onto my Linux server a
 
 set -e
 
+echo 'Removing dangling images'
+yes | docker image prune
+
 echo 'Pulling latest'
 docker pull docker.pkg.github.com/my-profile/my-repo/my-image:latest
 
