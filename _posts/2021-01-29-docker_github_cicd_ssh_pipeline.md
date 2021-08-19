@@ -5,62 +5,74 @@ date: 2021-01-29 16:06:21 -0600
 categories: ops
 ---
 
-I dislike ops, but oddly I enjoy running my own Linux server. Last year I got interested in deploying a container-based application using an automated Github CI/CD workflow to a $5/mo Linode VPS server.
+Last updated August 18, 2021.
 
-This workflow builds the project for every branch and PR. The build is based on a `docker-compose.test.yml` file with an `sut` task.
+Oddly, I still enjoy running my own Linux server. A few years ago, I became interested in deploying a container-based application using an automated Github-Actions-based CI/CD workflow to a $5/mo Linode VPS server. These workflows run the test suite against PRs and build and deploy docker images via SSH.
 
-If the tests pass and it's on the `main` branch, this workflow compiles a production-ready image (this could use further optimization), pushes it to the Github Docker Repo, and redeploys it via SSH.
+I recently split up this workflow into separate files and stopped using the Docker-based `docker-compose.test.yml`/`sut` workflow. I've replaced it with the native Github Ruby pipeline, which is substantially faster than building a Docker image just to run tests.
 
-My biggest issues with this process is that Github Actions takes around 12 minutes to complete the workflow for a production deploy.
+Here's my test workflow pipeline that runs the Ruby-based test suite on every new PR.
 
 ```yml
 # .github/workflows/cicd.yml
 
-name: CICD
+name: Tests
 
-# Kick off this pipeline on either a pull request or push to a branch
-on:
-  push:
-  pull_request:
+on: [pull_request]
 
 jobs:
-  # Run this application's tests or simply build the image.
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Install ruby dependencies
+        run: bundle install
+      - name: Install javascript dependencies
+        run: yarn install
       - name: Run tests
-        run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file Dockerfile
-          fi
+        run: bundle exec rake
+```
 
-  # Build a production image and push to GitHub Packages.
+Once PRs are merged to `main`, a follow-up `Deploy` workflow builds a Docker image and deploys it to my Linode server via SSH:
+
+```yml
+name: Deploy
+
+on:
   push:
-    # Ensure test job passes before pushing image.
-    needs: test
+    branches:
+      - main
 
+jobs:
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  build:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Build image
         run: docker build . --file Dockerfile --tag docker.pkg.github.com/my-profile/my-repo/my-image:latest
+
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
       - name: Push image
         run: docker push docker.pkg.github.com/my-profile/my-repo/my-image:latest
 
-  # Run the deploy.sh script on a server
   deploy:
-    needs: push
+    needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
       - name: Deploy
@@ -71,7 +83,7 @@ jobs:
           rm ssh_key
 ```
 
-In the final step of the CICD pipeline above, Github SSHs onto my Linux server and redeploys the application using a custom `deploy.sh` script. This is a generic example of what that script does. Things could definitely be easier with a `docker-compose.prod.yml` file, but Compose can also be too helpful by abstracting so much complexity.
+The above Deploy workflow references a custom `deploy.sh` script. Here's a generic example of what that script does:
 
 ```sh
 #!/bin/sh
