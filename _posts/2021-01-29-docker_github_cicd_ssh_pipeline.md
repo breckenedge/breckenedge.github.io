@@ -14,8 +14,7 @@ I recently split up this workflow into separate files and stopped using the Dock
 Here's my test workflow pipeline that runs the Ruby-based test suite on every new PR.
 
 ```yml
-# .github/workflows/cicd.yml
-
+# in .github/workflows/test.yml
 name: Tests
 
 on: [pull_request]
@@ -43,6 +42,7 @@ jobs:
 Once PRs are merged to `main`, a follow-up `Deploy` workflow builds a Docker image and deploys it to my Linode server via SSH:
 
 ```yml
+# in .github/workflows/deploy.yml
 name: Deploy
 
 on:
