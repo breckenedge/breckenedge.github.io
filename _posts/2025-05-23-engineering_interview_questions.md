@@ -2,7 +2,7 @@
 layout: post
 title: Interview question repository for prospective employeers
 date: 2025-05-23 12:10:21 -0700
-categories: ops
+categories: career
 —
 
 My repository of questions I can use during interviews to gauge the viability of a collaboration.
