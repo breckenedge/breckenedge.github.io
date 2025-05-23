@@ -1,3 +1,10 @@
+—
+layout: post
+title: Interview question repository for prospective employeers
+date: 2025-05-23 12:10:21 -0700
+categories: ops
+—
+
 My repository of questions I can use during interviews to gauge the viability of a collaboration.
 
 # Lifecycle
@@ -27,4 +34,3 @@ My repository of questions I can use during interviews to gauge the viability of
 - Does the team have a support escalation process?
 - Does the team conduct on-call rotations?
 - What was the last outage like? How was recovery?
-   
