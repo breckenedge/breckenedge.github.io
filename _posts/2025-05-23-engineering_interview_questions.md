@@ -2,25 +2,29 @@ My repository of questions I can use during interviews to gauge the viability of
 
 # Lifecycle
 
-1. How often do you deploy features to production?
-2. What is the process for approving deployments to production?
-2. How does the application run in production? Docker? Natively? Kubernetes?
-3. Are you using a particular cloud provider?
-4. What is the team’s cadence?
-5. Does the team use any CI/CD tools such as Jenkins, GitHub Actions or CircleCI?
+- How often do you deploy to production?
+- How do you approve deployments to production?
+- How does the application run in production? Docker? Natively? Kubernetes?
+- Are you using a particular cloud provider?
+- What is the team’s cadence?
+- Does the team use any CI/CD tools such as Jenkins, GitHub Actions or CircleCI?
 
 # Culture
 
-1. Does your team have any taboo topics or practices?
-2. How are code changed reviewed and approved?
-3. How are process changes discussed and made?
-4. How frequent are stand-ups and how long do they last?
-5. Do team members pair on code?
-6. How are new dependencies evaluated and discussed?
-7. Does your team have a plan for career growth?
-8. What is the experience level of your most-junior engineer? Most-senior? 
+- Does your team have any taboo topics or practices?
+- How are code changed reviewed and approved?
+- How are process changes discussed and made?
+- How frequent are stand-ups and how long do they last?
+- Do team members pair on code?
+- How are new dependencies evaluated and discussed?
+- Does your team have a plan for career growth?
+- What is the experience level of your most-junior engineer? Most-senior? 
 
 # Quality
 
-1. How are architectural proposals made and discussed?
-2. How fast are deprecated features disabled and removed?
+- How are architectural proposals made and discussed?
+- How fast are deprecated features disabled and removed? 
+- Does the team have a support escalation process?
+- Does the team conduct on-call rotations?
+- What was the last outage like? How was recovery?
+   
