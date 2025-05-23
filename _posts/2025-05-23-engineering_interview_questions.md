@@ -7,6 +7,15 @@ categories: career
 
 My repository of questions I can use during interviews to gauge the viability of a collaboration.
 
+# Product
+
+- Is there a business analytics or data analytics team?
+- How many customers does the product have?
+- How large is the product’s total-addressable-market?
+- What is the overall product architecture?
+- How old is the product?
+- How do stakeholders monitor the viability and health of the product?
+
 # Lifecycle
 
 - How often does the team release their code or deploy to production?
@@ -20,6 +29,7 @@ My repository of questions I can use during interviews to gauge the viability of
 
 # Culture
 
+- What are the team members timezones?
 - How are process changes discussed and made?
 - How frequent are stand-ups and how long do they last?
 - Do team members pair on code?
@@ -32,7 +42,8 @@ My repository of questions I can use during interviews to gauge the viability of
 - What is the interaction like with Design and Product team members? Marketing and Sales?
 - How often do developers interact with internal and external customers and stakeholders? 
 - Does the team have any taboo topics or practices?
-- Does the business require tracking of time spent on particular tasks? 
+- Does the business require tracking of time spent on particular tasks?
+- Is this a new position or backfill for turnover?  
 
 # Quality
 
