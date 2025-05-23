@@ -29,7 +29,7 @@ My repository of questions I can use during interviews to gauge the viability of
 
 # Culture
 
-- What are the team members timezones?
+- How geographically distributed are team members?
 - How are process changes discussed and made?
 - How frequent are stand-ups and how long do they last?
 - Do team members pair on code?
