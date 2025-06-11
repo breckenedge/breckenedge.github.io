@@ -25,6 +25,8 @@ My repository of questions I can use during interviews to gauge the viability of
 - Does the team use any CI/CD tools such as Jenkins, GitHub Actions or CircleCI?
 - How are projects estimated and planned?
 - How are individual tasks assigned?
+- Do merges require approval? Who approves them?
+- How long does it typically take for a PR to be reviewed and merged?
 
 # Culture
 
@@ -42,7 +44,7 @@ My repository of questions I can use during interviews to gauge the viability of
 - How often do developers interact with internal and external customers and stakeholders? 
 - Does the team have any taboo topics or practices?
 - Does the business require tracking of time spent on particular tasks?
-- Is this a new position or backfill for turnover?  
+- Is this a new position or backfill for turnover?
 
 # Quality
 
