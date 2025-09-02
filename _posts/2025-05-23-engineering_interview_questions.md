@@ -19,6 +19,7 @@ My repository of questions I can use during interviews to gauge the viability of
 
 - How often does the team release their code or deploy to production?
 - How are releases approved?
+- How long does it take to make architectural changes? How many people are involved in the process?
 - How does the application run in production? Binary? Docker? Natively? Kubernetes?
 - Does the team use a particular cloud provider? What is the monthly cloud spend?
 - How is infrastructure provisioned?
@@ -55,3 +56,5 @@ My repository of questions I can use during interviews to gauge the viability of
 - Does the team conduct on-call rotations?
 - What was the last outage like? How was recovery?
 - Does the team conduct A/B testing?
+- How does the team handle slow and flaky tests?
+  
