@@ -19,12 +19,15 @@ My repository of questions I can use during interviews to gauge the viability of
 
 - How often does the team release their code or deploy to production?
 - How are releases approved?
+- How long does it take to make architectural changes? How many people are involved in the process?
 - How does the application run in production? Binary? Docker? Natively? Kubernetes?
 - Does the team use a particular cloud provider? What is the monthly cloud spend?
 - How is infrastructure provisioned?
 - Does the team use any CI/CD tools such as Jenkins, GitHub Actions or CircleCI?
 - How are projects estimated and planned?
 - How are individual tasks assigned?
+- Do merges require approval? Who approves them?
+- How long does it typically take for a PR to be reviewed and merged?
 
 # Culture
 
@@ -42,7 +45,7 @@ My repository of questions I can use during interviews to gauge the viability of
 - How often do developers interact with internal and external customers and stakeholders? 
 - Does the team have any taboo topics or practices?
 - Does the business require tracking of time spent on particular tasks?
-- Is this a new position or backfill for turnover?  
+- Is this a new position or backfill for turnover?
 
 # Quality
 
@@ -53,3 +56,5 @@ My repository of questions I can use during interviews to gauge the viability of
 - Does the team conduct on-call rotations?
 - What was the last outage like? How was recovery?
 - Does the team conduct A/B testing?
+- How does the team handle slow and flaky tests?
+  
