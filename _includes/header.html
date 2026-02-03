@@ -17,11 +17,15 @@
         </label>
 
         <div class="trigger">
-          {%- if site.github_username or site.linkedin_username or site.printables_username -%}
+          {%- if site.github_username or site.linkedin_username or site.printables_username or site.makerworld_username or site.reddit_username or site.cults3d_username or site.hackernews_username -%}
             <span class="header-social-links">
               {%- if site.github_username -%}<a href="https://github.com/{{ site.github_username| cgi_escape | escape }}" title="GitHub"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg></a>{%- endif -%}
               {%- if site.linkedin_username -%}<a href="https://www.linkedin.com/in/{{ site.linkedin_username| cgi_escape | escape }}" title="LinkedIn"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg></a>{%- endif -%}
               {%- if site.printables_username -%}<a href="https://www.printables.com/@{{ site.printables_username| cgi_escape | escape }}" title="Printables"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#printables' | relative_url }}"></use></svg></a>{%- endif -%}
+              {%- if site.makerworld_username -%}<a href="https://makerworld.com/@{{ site.makerworld_username| cgi_escape | escape }}" title="MakerWorld"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#makerworld' | relative_url }}"></use></svg></a>{%- endif -%}
+              {%- if site.cults3d_username -%}<a href="https://cults3d.com/en/users/{{ site.cults3d_username| cgi_escape | escape }}" title="Cults3D"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#cults3d' | relative_url }}"></use></svg></a>{%- endif -%}
+              {%- if site.reddit_username -%}<a href="https://www.reddit.com/user/{{ site.reddit_username| cgi_escape | escape }}" title="Reddit"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#reddit' | relative_url }}"></use></svg></a>{%- endif -%}
+              {%- if site.hackernews_username -%}<a href="https://news.ycombinator.com/user?id={{ site.hackernews_username| cgi_escape | escape }}" title="Hacker News"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#hackernews' | relative_url }}"></use></svg></a>{%- endif -%}
             </span>
           {%- endif -%}
           {%- for path in page_paths -%}
