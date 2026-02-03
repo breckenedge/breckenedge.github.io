@@ -7,7 +7,9 @@ categories: career
 
 I've been asked a few times over the years how to break into software development as a career. About nine years ago, I switched careers from Technical Writer to Software Developer.
 
-Here are a few things that I reccomend doing to become a Software Developer:
+**Note:** This post was written in 2020 and is significantly out of date. The advice may no longer reflect current practices or resources.
+
+Here are a few things that I recommend doing to become a Software Developer:
 
 1. Attend meetups to network. Nine years later, I still correspond with people from my first programming meetup (the Dallas Ruby Brigade).
 
@@ -15,8 +17,8 @@ Here are a few things that I reccomend doing to become a Software Developer:
 
 1. Learn some C programming. C is the ancestor of many modern languages. I read "C Programming Absolute Beginner's Guide" a few years ago and liked it.
 
-1. Practice coding fundamentals. Entry-level programming interviews will probably expect some demonstration of using an algorithm to solve some well-trod problem. The book "Cracking the Coding Interview" is invaluable and it has a timeline for beginning a coding career. [https://codewars.com](https://codewars.com) is great for self-paced practice in a variety of languages. [https://adventofcode.com](https://adventofcode.com) is fun and very challenging. There's also [https://projecteuler.net/](https://projecteuler.net/).
+1. Practice coding fundamentals. Entry-level programming interviews will probably expect some demonstration of using an algorithm to solve some well-trod problem. The book "Cracking the Coding Interview" is invaluable and it has a timeline for beginning a coding career. [Codewars](https://codewars.com) is great for self-paced practice in a variety of languages. [Advent of Code](https://adventofcode.com) is fun and very challenging. There's also [Project Euler](https://projecteuler.net/).
 
-1. Read about trends in programming languages, architectures and frameworks. [https://news.ycombinator.com](https://news.ycombinator.com) is a good source for daily trends, but I also like to read blogs and tech radars. My favorite blogs include [https://martinfowler.com](https://martinfowler.com) and [https://blog.codinghorror.com](https://blog.codinghorror.com).
+1. Read about trends in programming languages, architectures and frameworks. [Hacker News](https://news.ycombinator.com) is a good source for daily trends, but I also like to read blogs and tech radars. My favorite blogs include [Martin Fowler](https://martinfowler.com) and [Coding Horror](https://blog.codinghorror.com).
 
 1. Launch a personal project. Don't think you need to know everything to start your career. Start interviewing as soon as you have a personal project that you can show off. A common first project is a todo list app.

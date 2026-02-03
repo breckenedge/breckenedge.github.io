@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Interview question repository for prospective employeers
+title: Interview question repository for prospective employers
 date: 2025-05-23 12:10:21 -0700
 ---
 
