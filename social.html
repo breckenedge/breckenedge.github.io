@@ -1,0 +1,347 @@
+---
+layout: default
+title: Social Feed
+---
+
+<style>
+  .social-feed-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .social-feed-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+
+  .social-feed-section h2 .svg-icon {
+    width: 24px;
+    height: 24px;
+    fill: #828282;
+  }
+
+  .feed-item {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0.75rem 0;
+  }
+
+  .feed-item:last-child {
+    border-bottom: none;
+  }
+
+  .feed-item a {
+    font-weight: 500;
+  }
+
+  .feed-item .feed-meta {
+    color: #828282;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  .feed-item .feed-description {
+    margin-top: 0.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .feed-item .feed-tag {
+    display: inline-block;
+    background: #f0f0f0;
+    color: #555;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    margin-right: 0.25rem;
+  }
+
+  .feed-loading {
+    color: #828282;
+    font-style: italic;
+  }
+
+  .feed-error {
+    color: #b00;
+    font-size: 0.875rem;
+  }
+
+  .other-profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .other-profiles li a {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .other-profiles .svg-icon {
+    width: 20px;
+    height: 20px;
+    fill: #828282;
+  }
+</style>
+
+<div class="social-feed">
+
+  <!-- GitHub Activity -->
+  <div class="social-feed-section">
+    <h2>
+      <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg>
+      GitHub Activity
+    </h2>
+    <div id="github-feed"><span class="feed-loading">Loading&hellip;</span></div>
+  </div>
+
+  <!-- Hacker News Activity -->
+  <div class="social-feed-section">
+    <h2>
+      <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#hackernews' | relative_url }}"></use></svg>
+      Hacker News Activity
+    </h2>
+    <div id="hn-feed"><span class="feed-loading">Loading&hellip;</span></div>
+  </div>
+
+  <!-- Other Profiles -->
+  <div class="social-feed-section">
+    <h2>Other Profiles</h2>
+    <p>These platforms don't offer public APIs, but you can find me here:</p>
+    <ul class="other-profiles">
+      {%- if site.linkedin_username -%}
+      <li>
+        <a href="https://www.linkedin.com/in/{{ site.linkedin_username | cgi_escape | escape }}">
+          <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg>
+          LinkedIn
+        </a>
+      </li>
+      {%- endif -%}
+      {%- if site.twitter_username -%}
+      <li>
+        <a href="https://www.twitter.com/{{ site.twitter_username | cgi_escape | escape }}">
+          <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#twitter' | relative_url }}"></use></svg>
+          Twitter
+        </a>
+      </li>
+      {%- endif -%}
+      {%- if site.facebook_username -%}
+      <li>
+        <a href="https://www.facebook.com/{{ site.facebook_username | cgi_escape | escape }}">
+          <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#facebook' | relative_url }}"></use></svg>
+          Facebook
+        </a>
+      </li>
+      {%- endif -%}
+      {%- if site.reddit_username -%}
+      <li>
+        <a href="https://www.reddit.com/user/{{ site.reddit_username | cgi_escape | escape }}">
+          <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#reddit' | relative_url }}"></use></svg>
+          Reddit
+        </a>
+      </li>
+      {%- endif -%}
+      {%- if site.printables_username -%}
+      <li>
+        <a href="https://www.printables.com/@{{ site.printables_username | cgi_escape | escape }}">
+          <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#printables' | relative_url }}"></use></svg>
+          Printables
+        </a>
+      </li>
+      {%- endif -%}
+      {%- if site.makerworld_username -%}
+      <li>
+        <a href="https://makerworld.com/@{{ site.makerworld_username | cgi_escape | escape }}">
+          <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#makerworld' | relative_url }}"></use></svg>
+          MakerWorld
+        </a>
+      </li>
+      {%- endif -%}
+      {%- if site.cults3d_username -%}
+      <li>
+        <a href="https://cults3d.com/en/users/{{ site.cults3d_username | cgi_escape | escape }}">
+          <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#cults3d' | relative_url }}"></use></svg>
+          Cults3D
+        </a>
+      </li>
+      {%- endif -%}
+    </ul>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var GITHUB_USER = {{ site.github_username | jsonify }};
+  var HN_USER = {{ site.hackernews_username | jsonify }};
+
+  // --- Helpers ---
+  function timeAgo(dateString) {
+    var seconds = Math.floor((Date.now() - new Date(dateString).getTime()) / 1000);
+    if (seconds < 60) return 'just now';
+    var minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return minutes + (minutes === 1 ? ' minute ago' : ' minutes ago');
+    var hours = Math.floor(minutes / 60);
+    if (hours < 24) return hours + (hours === 1 ? ' hour ago' : ' hours ago');
+    var days = Math.floor(hours / 24);
+    if (days < 30) return days + (days === 1 ? ' day ago' : ' days ago');
+    var months = Math.floor(days / 30);
+    return months + (months === 1 ? ' month ago' : ' months ago');
+  }
+
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(text));
+    return div.innerHTML;
+  }
+
+  // --- GitHub ---
+  function describeGithubEvent(event) {
+    var repo = event.repo ? event.repo.name : '';
+    var repoUrl = 'https://github.com/' + repo;
+    var repoLink = '<a href="' + repoUrl + '">' + escapeHtml(repo) + '</a>';
+    var payload = event.payload || {};
+
+    switch (event.type) {
+      case 'PushEvent':
+        var count = payload.commits ? payload.commits.length : 0;
+        var msg = count > 0 ? escapeHtml(payload.commits[0].message.split('\n')[0]) : '';
+        return {
+          title: 'Pushed ' + count + (count === 1 ? ' commit' : ' commits') + ' to ' + repoLink,
+          detail: msg ? '"' + msg + '"' : ''
+        };
+      case 'CreateEvent':
+        var ref = payload.ref_type === 'repository' ? 'repository' : payload.ref_type + ' <code>' + escapeHtml(payload.ref || '') + '</code> in';
+        return { title: 'Created ' + ref + ' ' + repoLink, detail: '' };
+      case 'DeleteEvent':
+        return { title: 'Deleted ' + payload.ref_type + ' <code>' + escapeHtml(payload.ref || '') + '</code> in ' + repoLink, detail: '' };
+      case 'IssuesEvent':
+        var issue = payload.issue || {};
+        return {
+          title: escapeHtml(payload.action).charAt(0).toUpperCase() + escapeHtml(payload.action).slice(1) + ' issue in ' + repoLink,
+          detail: '<a href="' + (issue.html_url || '#') + '">' + escapeHtml(issue.title || '') + '</a>'
+        };
+      case 'IssueCommentEvent':
+        var cIssue = payload.issue || {};
+        return {
+          title: 'Commented on issue in ' + repoLink,
+          detail: '<a href="' + (payload.comment ? payload.comment.html_url : '#') + '">' + escapeHtml(cIssue.title || '') + '</a>'
+        };
+      case 'PullRequestEvent':
+        var pr = payload.pull_request || {};
+        return {
+          title: escapeHtml(payload.action).charAt(0).toUpperCase() + escapeHtml(payload.action).slice(1) + ' pull request in ' + repoLink,
+          detail: '<a href="' + (pr.html_url || '#') + '">' + escapeHtml(pr.title || '') + '</a>'
+        };
+      case 'PullRequestReviewEvent':
+        var rpr = payload.pull_request || {};
+        return {
+          title: 'Reviewed pull request in ' + repoLink,
+          detail: '<a href="' + (rpr.html_url || '#') + '">' + escapeHtml(rpr.title || '') + '</a>'
+        };
+      case 'WatchEvent':
+        return { title: 'Starred ' + repoLink, detail: '' };
+      case 'ForkEvent':
+        return { title: 'Forked ' + repoLink, detail: '' };
+      case 'ReleaseEvent':
+        var rel = payload.release || {};
+        return {
+          title: 'Published release in ' + repoLink,
+          detail: '<a href="' + (rel.html_url || '#') + '">' + escapeHtml(rel.tag_name || rel.name || '') + '</a>'
+        };
+      default:
+        return { title: event.type.replace(/Event$/, '') + ' in ' + repoLink, detail: '' };
+    }
+  }
+
+  function renderGithub(events) {
+    var container = document.getElementById('github-feed');
+    if (!events || events.length === 0) {
+      container.innerHTML = '<p class="feed-meta">No recent public activity.</p>';
+      return;
+    }
+    var html = '';
+    // Show up to 15 events
+    var items = events.slice(0, 15);
+    for (var i = 0; i < items.length; i++) {
+      var info = describeGithubEvent(items[i]);
+      html += '<div class="feed-item">';
+      html += '<div>' + info.title + '</div>';
+      if (info.detail) html += '<div class="feed-description">' + info.detail + '</div>';
+      html += '<div class="feed-meta">' + timeAgo(items[i].created_at) + '</div>';
+      html += '</div>';
+    }
+    container.innerHTML = html;
+  }
+
+  fetch('https://api.github.com/users/' + encodeURIComponent(GITHUB_USER) + '/events/public?per_page=15')
+    .then(function (res) {
+      if (!res.ok) throw new Error('GitHub API returned ' + res.status);
+      return res.json();
+    })
+    .then(renderGithub)
+    .catch(function (err) {
+      document.getElementById('github-feed').innerHTML =
+        '<p class="feed-error">Could not load GitHub activity.</p>' +
+        '<p><a href="https://github.com/' + encodeURIComponent(GITHUB_USER) + '">View profile on GitHub</a></p>';
+    });
+
+  // --- Hacker News (Algolia API) ---
+  function renderHN(hits) {
+    var container = document.getElementById('hn-feed');
+    if (!hits || hits.length === 0) {
+      container.innerHTML = '<p class="feed-meta">No recent activity.</p>';
+      return;
+    }
+    var html = '';
+    var items = hits.slice(0, 15);
+    for (var i = 0; i < items.length; i++) {
+      var hit = items[i];
+      var hnUrl = 'https://news.ycombinator.com/item?id=' + (hit.objectID || hit.story_id || '');
+      var isStory = !!hit.title;
+      html += '<div class="feed-item">';
+      if (isStory) {
+        html += '<div><a href="' + hnUrl + '">' + escapeHtml(hit.title) + '</a></div>';
+        if (hit.url) {
+          html += '<div class="feed-description"><a href="' + escapeHtml(hit.url) + '">' + escapeHtml(hit.url) + '</a></div>';
+        }
+        html += '<div class="feed-meta">';
+        html += (hit.points || 0) + ' points';
+        html += ' &middot; ' + (hit.num_comments || 0) + ' comments';
+      } else {
+        // Comment
+        var commentText = hit.comment_text || '';
+        // Strip HTML tags for preview
+        var tmp = document.createElement('div');
+        tmp.innerHTML = commentText;
+        var plain = tmp.textContent || tmp.innerText || '';
+        if (plain.length > 200) plain = plain.substring(0, 200) + '…';
+        var storyTitle = hit.story_title || 'a discussion';
+        var storyUrl = hit.story_url || ('https://news.ycombinator.com/item?id=' + (hit.story_id || ''));
+        html += '<div>Commented on <a href="' + escapeHtml(storyUrl) + '">' + escapeHtml(storyTitle) + '</a></div>';
+        html += '<div class="feed-description">' + escapeHtml(plain) + '</div>';
+        html += '<div class="feed-meta">';
+      }
+      html += ' &middot; ' + timeAgo(hit.created_at);
+      html += '</div></div>';
+    }
+    container.innerHTML = html;
+  }
+
+  fetch('https://hn.algolia.com/api/v1/search_by_date?tags=author_' + encodeURIComponent(HN_USER) + '&hitsPerPage=15')
+    .then(function (res) {
+      if (!res.ok) throw new Error('HN API returned ' + res.status);
+      return res.json();
+    })
+    .then(function (data) { renderHN(data.hits || []); })
+    .catch(function (err) {
+      document.getElementById('hn-feed').innerHTML =
+        '<p class="feed-error">Could not load Hacker News activity.</p>' +
+        '<p><a href="https://news.ycombinator.com/user?id=' + encodeURIComponent(HN_USER) + '">View profile on Hacker News</a></p>';
+    });
+})();
+</script>
