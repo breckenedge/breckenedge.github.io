@@ -1,0 +1,23 @@
+---
+layout: none
+sitemap: false
+---
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+(function() {
+  var tag = {{ site.amazon_affiliate_id | jsonify }};
+  var params = new URLSearchParams(window.location.search);
+  var asin = params.get('asin');
+  if (asin && /^[A-Z0-9]{10}$/.test(asin)) {
+    window.location.replace(`https://www.amazon.com/dp/${asin}?tag=${tag}`);
+  } else {
+    document.write('Invalid or missing product ID.');
+  }
+})();
+</script>
+</head>
+<body></body>
+</html>
