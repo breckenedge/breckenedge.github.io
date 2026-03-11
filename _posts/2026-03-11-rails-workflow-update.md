@@ -7,19 +7,19 @@ categories: dev
 
 Six weeks ago I wrote about [my Rails workflow](/dev/2026/02/03/rails-workflow-claude-code-devcontainers-mcp.html) — devcontainers, Claude Code on the host, MCP servers, a Go binary for team onboarding. Most of that still holds. But enough has changed that it's worth a follow-up.
 
-## Devcontainers: checking in development keys
+## Devcontainers update
 
-Still using devcontainers. One thing I've added: checking in development decryption keys so the container can come up with zero interaction. Rails encrypted credentials need a key to decrypt, and if that key isn't available, you're prompted before anything works.
+I'm still using devcontainers and encouraging their adoption across the team. One thing I've added: checking in development decryption keys so the container can come up with zero interaction. Rails encrypted credentials need a key to decrypt, and if that key isn't available, you're prompted before anything works. Really I want anyone to be able to just click that "Launch Workspace" button and have a ready-to-use IDE and development environment.
 
 Checking in keys sounds like a bad idea, and in general it is. The reason it's fine here is that the development credentials file doesn't contain anything real — no production secrets, no API keys that matter. If someone gets the dev key, they get lorem ipsum. The habit of never checking in keys is a good one, but it exists to protect real secrets. Blindly applying it to dev environment setup just creates friction for automation with no actual security benefit.
 
-## Worktrees: I changed my mind
+## Worktree evolution
 
 In the last post I said I wasn't using git worktrees because of port conflicts — the Shakapacker dev server port gets baked into the build and hardcoded into the repo, so two containers can't share it. That was accurate at the time.
 
-What's changed is that I now have a custom skill that handles port provisioning automatically. When it creates a new worktree, it picks an available port, updates the relevant config, and brings up the container on that port. The problem is solved. I'm using worktrees.
+What's changed is that I now have a custom skill that handles port provisioning automatically. When it creates a new worktree, it picks an available port, updates the relevant config, and brings up the container on that port. The problem is mostly solved. I'm using worktrees. Except that worktrees still don't work out-of-the box with devcontainers since the repo is a symlink, and Docker won't import symlinks by default. The march towards perfect environment setup continues.
 
-I'm not using Claude Code's built-in worktree support, though. It leaves orphaned worktrees around, and it gets the mechanics wrong often enough that I stopped trusting it for this. The custom skill is more reliable because it's specific to this project's port setup.
+It's worth calling out that I'm not using Claude Code's built-in worktree support, though. It leaves orphaned worktrees around, and it gets the mechanics wrong often enough that I stopped trusting it for this. The custom skill is more reliable because it's specific to this project's port setup. I do see the built-in Claude Code worktree feature being much more useful when I have fully migrated my development environment to the cloud cause I just wont care how many worktrees it spins up when the environment is ephemeral. Not quite there yet with the team though.
 
 ## Background agents: the @claude GitHub action
 
