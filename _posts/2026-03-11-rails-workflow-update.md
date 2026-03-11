@@ -5,7 +5,7 @@ date: 2026-03-11 12:00:00 -0700
 categories: dev
 ---
 
-Six weeks ago I wrote about my Rails workflow — devcontainers, Claude Code on the host, MCP servers, a Go binary for team onboarding. Most of that still holds. But enough has changed that it's worth a follow-up.
+Six weeks ago I wrote about [my Rails workflow](/dev/2026/02/03/rails-workflow-claude-code-devcontainers-mcp.html) — devcontainers, Claude Code on the host, MCP servers, a Go binary for team onboarding. Most of that still holds. But enough has changed that it's worth a follow-up.
 
 ## Devcontainers: checking in development keys
 
