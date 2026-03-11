@@ -59,6 +59,6 @@ One more thing worth mentioning: [`/insights`](https://code.claude.com/docs/en/i
 
 The trajectory since February has been toward less babysitting. Background agents handling recurring research, worktrees running in parallel, plugins provisioned by admins rather than configured by hand. The interactive workflow is still there for design and complex problems, but a growing share of the work is just happening in the background.
 
-Claude Code recently shipped [`/loop`](https://code.claude.com/docs/en/scheduled-tasks), a native scheduled task command. `/loop 1d /my-skill` and it runs on a cron, no external infrastructure needed. That's essentially what [OpenClaw](https://en.wikipedia.org/wiki/OpenClaw) was doing — always-on background work on a timer — but built into the tool I'm already using. The weekly radar update I open an issue for manually today could just be a `/loop`. I'll get there.
+Claude Code recently shipped [`/loop`](https://code.claude.com/docs/en/scheduled-tasks), a native scheduled task command. `/loop 1d /my-skill` and it runs on a cron, no external infrastructure needed. That's essentially what [OpenClaw](https://en.wikipedia.org/wiki/OpenClaw) was doing — always-on background work on a timer — but built into the tool I'm already using.
 
-The [Ralph Loop](https://github.com/snarktank/ralph) is a different thing entirely that I haven't tried yet — running an agent repeatedly against a PRD until it's done, with git as the memory between fresh sessions. Still on the list.
+I haven't tried the [Ralph Loop](https://github.com/snarktank/ralph) yet — running an agent repeatedly against a PRD until it's done, with git as the memory between fresh sessions. Still on the list.
