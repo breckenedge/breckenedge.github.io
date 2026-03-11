@@ -43,17 +43,17 @@ On the team plan, managers can approve and centrally install plugins. Atlassian 
 
 `bin/mcp-setup` is still around for the MCP servers that don't have a team-managed equivalent, but it covers less ground now.
 
-## Parallel agents
+## Subagents
 
 Using Claude Code and Git Town together has a side effect: a lot more PRs. More PRs means more CI runs, and CI queues that were fine before started backing up.
 
-To address it, I used a two-phase approach. First, a main agent researched the CI suite and identified where improvements were possible. Then I told Claude to use the worktree skill to create five worktrees and launch five subagents to implement the changes in parallel, one per worktree, each opening its own PR.
+To address it, I used a two-phase approach. First, a main agent researched the CI suite and identified where improvements were possible. Then I told Claude to use the worktree skill to create five worktrees and launch five [subagents](https://code.claude.com/docs/en/sub-agents.md) to implement the changes in parallel, one per worktree, each opening its own PR.
 
 The constraint is that this only works when the changes are genuinely independent. If two agents are touching the same files, you've just created merge conflicts at scale. The main agent's research phase is what makes the parallel phase viable — it tells you which improvements don't step on each other.
 
 ## /insights
 
-One more thing worth mentioning: `/insights`. Run it in a Claude Code session and it analyzes your history and generates a report — interaction patterns, friction points, what's working, and ready-to-paste suggestions for your `CLAUDE.md`. It's a useful way to surface things you're doing repeatedly that could be codified as instructions or skills. I've run it a few times and each time caught something worth adding to project config.
+One more thing worth mentioning: [`/insights`](https://code.claude.com/docs/en/interactive-mode.md). Run it in a Claude Code session and it analyzes your history and generates a report — interaction patterns, friction points, what's working, and ready-to-paste suggestions for your `CLAUDE.md`. It's a useful way to surface things you're doing repeatedly that could be codified as instructions or skills. I've run it a few times and each time caught something worth adding to project config.
 
 ## Where it stands
 
