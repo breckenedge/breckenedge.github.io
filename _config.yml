@@ -30,6 +30,11 @@ twitter_username: breckenedge
 facebook_username: breckenedge
 amazon_affiliate_id: breckenedge-20
 author: Aaron Breckenridge
+
+utterances:
+  repo: breckenedge/breckenedge.github.io
+  issue_term: pathname
+  theme: github-light
 social:
   name: Aaron Breckenridge
   links:
