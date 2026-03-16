@@ -41,6 +41,14 @@ This extends to larger libraries too. An agent can maintain an abstraction tailo
 
 I'm not saying never use libraries. But I'm much more willing to write it myself than I used to be.
 
+## Native apps
+
+The same logic that's making me reconsider microservices applies to mobile. React Native's pitch was always about sharing code and team across iOS and Android — one codebase, one set of engineers. The hidden cost was the experience. Apps built on React Native feel like apps built on React Native. The performance ceiling is lower, the native integrations are messier, and users notice even when they can't articulate why.
+
+That tradeoff made sense when maintaining two separate native codebases meant double the engineering cost. Agents change the math. Swift and Kotlin are well-documented, heavily represented in training data, and agents work in them naturally. The cross-platform complexity that made React Native appealing — context-switching between two platforms, two build systems, two sets of platform idioms — is the kind of complexity agents absorb without complaint.
+
+If the cost of going native is now roughly the same as the cost of React Native, you should just go native. The experience is better and always will be.
+
 ## Architecture
 
 This one cuts the other direction. Everything I've said above might suggest that architectural decisions matter less — that you can just let agents figure it out. The opposite is true. Good architecture has never been more important.
