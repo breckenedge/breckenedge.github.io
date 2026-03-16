@@ -43,11 +43,11 @@ I'm not saying never use libraries. But I'm much more willing to write it myself
 
 ## Native apps
 
-The same logic that's making me reconsider microservices applies to mobile. React Native's pitch was always about sharing code and team across iOS and Android — one codebase, one set of engineers. The hidden cost was the experience. Apps built on React Native feel like apps built on React Native. The performance ceiling is lower, the native integrations are messier, and users notice even when they can't articulate why.
+I'm still using React Native, but for the first time I'm seriously questioning whether I'd choose it again for a new project. The same logic that's making me reconsider microservices applies here. React Native's pitch was always about sharing code and team across iOS and Android — one codebase, one set of engineers. The hidden cost was the experience. Apps built on React Native feel like apps built on React Native. The performance ceiling is lower, the native integrations are messier, and users notice even when they can't articulate why.
 
 That tradeoff made sense when maintaining two separate native codebases meant double the engineering cost. Agents change the math. Swift and Kotlin are well-documented, heavily represented in training data, and agents work in them naturally. The cross-platform complexity that made React Native appealing — context-switching between two platforms, two build systems, two sets of platform idioms — is the kind of complexity agents absorb without complaint.
 
-If the cost of going native is now roughly the same as the cost of React Native, you should just go native. The experience is better and always will be.
+I haven't made the jump yet, but if I were starting a new mobile project today, I'd think a lot harder about going native than I would have a year ago.
 
 ## Architecture
 
