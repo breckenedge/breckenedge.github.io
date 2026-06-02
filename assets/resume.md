@@ -43,10 +43,11 @@
 #              --print-to-pdf="assets/resume.pdf" \
 #              "file:///<absolute-path>/assets/resume.html"
 #
-#          Chrome on this machine:
+#          Inside the repo devcontainer, use the portable handle $CHROME_BIN
+#          (/usr/bin/chromium). See CLAUDE.md. Outside the container, point at a
+#          local browser, e.g. on Windows:
 #            C:\Program Files\Google\Chrome\Application\chrome.exe
-#          (Edge works as a fallback:
-#            C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe)
+#            C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
 #
 # Step 3 — Verify the PDF visually (2 pages, black, ragged-right) and keep it in
 #          sync with this file. The /resume page needs no changes; it always

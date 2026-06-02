@@ -1,0 +1,25 @@
+{
+  "name": "breckenridge.dev (Jekyll + resume PDF)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "vscode",
+      "userUid": "automatic",
+      "userGid": "automatic",
+      "installZsh": false
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "remoteUser": "vscode",
+  "forwardPorts": [4000],
+  "postCreateCommand": "sh .devcontainer/setup-ssh.sh && bundle install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp"
+      ]
+    }
+  }
+}
