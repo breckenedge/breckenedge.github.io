@@ -1,0 +1,5 @@
+# Shell scripts and the Dockerfile run inside the Linux devcontainer, so they
+# must keep LF endings regardless of the host checkout settings (CRLF breaks
+# the shebang in the container: "/bin/sh^M: bad interpreter").
+*.sh            text eol=lf
+.devcontainer/Dockerfile text eol=lf
