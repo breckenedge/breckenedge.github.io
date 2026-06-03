@@ -1,5 +1,5 @@
 {
-  "name": "breckenridge.dev (Jekyll + resume PDF)",
+  "name": "breckenridge.dev",
   "build": {
     "dockerfile": "Dockerfile"
   },
