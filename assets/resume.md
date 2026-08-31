@@ -63,24 +63,28 @@ GitHub: [breckenedge](https://github.com/breckenedge) & [bockets](https://github
 
 # Summary
 
-Engineering leader with 10+ years building web and mobile products and 7+ years leading teams. Track record of driving measurable growth, including 20% YoY organic traffic and conversion-lift A/B tests, while running lean, AI-leveraged engineering teams. Hands-on full-stack background (Ruby/Rails, JavaScript) paired with the operational discipline to keep lean teams shipping fast.
+Engineering leader with 10+ years building web and mobile products and 7+ years leading teams, currently managing a team of 6. Track record of driving measurable growth, including 20% YoY organic traffic and conversion-lift A/B tests, while embedding AI into how the team plans, builds, and reviews code. Hands-on full-stack background (Ruby/Rails, JavaScript) paired with the operational discipline to keep teams shipping fast.
 
 ## Technical Skills
 
 Most Proficient Languages: Ruby, JavaScript
 Frameworks: Rails, Stimulus, Hotwire, Hotwire Native, React, React Native
 Databases: PostgreSQL, Redis, ElasticSearch, Pinecone
+AI & Agentic Tooling: Claude Code, MCP, Pi, Codex, OpenRouter
 Cloud & Infrastructure: AWS, Docker, Linux
 
 # Experience
 
 ## Team Lead/Engineering Manager @ BiggerPockets (Aug 2025 - Present)
 
-* Led 3-person Engineering team responsible for delivering and enhancing a revenue-generating affiliate system.
-* Restructured team operations to ship more with a leaner team, leaning on AI tooling and standardized environments to sustain delivery velocity.
+* Lead a 6-person Engineering team, grown from 3, responsible for delivering and enhancing a revenue-generating affiliate system.
+* Launched a new React-based forums experience with server-side rendering, delivering substantially faster interaction times.
+* Launched a public-facing MCP endpoint exposing BiggerPockets tools to Anthropic's community of connectors.
+* Automated code review for the entire Engineering team, putting AI-assisted review on every pull request.
+* Built AI skills and workflows for agentic-assisted development, automating bug fixes and feature delivery across Claude Code, Pi, Codex, and OpenRouter.
+* Partnered with Sales on customer calls and information discovery sessions to shape requirements for new products.
 * Executed test plans to intelligently improve user experiences and increase conversion rates.
 * Created Engineering plans according to Product Requirements Document specifications (and wrote a few PRDs myself).
-* Planned and incorporated AI into the development process, automating bug fixes and feature development using Claude Code and ChatGPT/Codex.
 * Transitioned team from local development environments to local and cloud-based DevContainers.
 
 ## Staff Software Engineer @ BiggerPockets (Jan 2022 - Aug 2025)
