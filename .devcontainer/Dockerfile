@@ -1,5 +1,5 @@
 # Match .ruby-version so the container build matches CI / GitHub Pages.
-FROM ruby:4.0.1-bookworm
+FROM ruby:4.0.6-bookworm
 
 # Chromium drives the headless render of assets/resume.pdf. The two font
 # packages are metric-compatible stand-ins for Calibri and Arial, which Linux
