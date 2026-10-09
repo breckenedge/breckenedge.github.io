@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Resume
+nav_exclude: true
 ---
 
 <a href="assets/resume.pdf" download>Download</a>
