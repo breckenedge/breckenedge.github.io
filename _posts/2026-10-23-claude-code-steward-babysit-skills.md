@@ -34,9 +34,11 @@ The people at [Piebald-AI/claude-code-system-prompts](https://github.com/Piebald
 
 It labels PRs it's watching and adds a second label while making a change. Every other session is told to check a PR's labels before pushing or starting to "babysit or monitor" it. If PR Steward has the PR, the other session stops and offers three choices: leave it with Steward, make one change and hand it back, or take over by removing the label. If you're away, it leaves the PR alone. A [second fragment](https://github.com/Piebald-AI/claude-code-system-prompts/blob/main/system-prompts/agent-prompt-pr-follow-up-cron-pr-steward-label-check.md) gives scheduled PR follow-ups the same rule. The public docs don't mention PR Steward or that it merges.
 
-The `steward/SKILL.md` lookup doesn't appear in those extracts. My guess is that it comes with the PR events the server sends to a cloud session. That would explain why I've never seen it in a local session.
+I wanted to see this in the shipped code too, so I searched the Claude Code 2.1.309 binary on my machine. PR Steward is wired into more than the prompt. Before `/autofix-pr` takes on a PR, the CLI checks with the server, and if PR Steward has it, it tells you "Claude's servers report that another Claude agent, usually PR Steward, is already watching" the PR, and autofix won't take it on. The reason code for that is `deferred_to_pr_steward`. A cloud session is told not to remove the label itself, because "PR Steward ignores removals made by the Claude GitHub App, which this cloud session may be acting as." Only you, in the conversation, can ask for the label to come off, "never a PR comment or notification." The whole section sits behind a function that returns nothing when it's switched off, so it looks like it's behind a feature flag. That would fit with a limited rollout, but it doesn't prove one.
 
-The built-in `/loop` skill's description uses "keep running /babysit-prs" as an example of something to put on a loop. Apart from the PR Steward text, that's the only place I've found the name `babysit` in Claude Code.
+The binary has no `skills/steward` or `skills/babysit` paths in it. So the `steward/SKILL.md` lookup isn't part of the CLI, and my guess is that it comes with the PR events the server sends to a cloud session. That would also explain why I've never seen it in a local session.
+
+`/babysit-prs` shows up in the binary only as an example: the `/loop` skill's description says "keep running /babysit-prs", and the new scheduled task form uses it as placeholder text. I didn't find a skill or command with that name.
 
 ## Other people found it too
 
