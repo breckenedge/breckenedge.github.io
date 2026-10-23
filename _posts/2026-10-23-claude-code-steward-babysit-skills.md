@@ -24,13 +24,21 @@ So it's not a jailbreak. It's a steering wheel that nobody told you was installe
 
 ## What I looked for
 
-**The docs.** The [cloud sessions page](https://code.claude.com/docs/en/claude-code-on-the-web) has sections on auto-fixing pull requests and on how Claude responds to PR activity. Neither mentions `steward`, `babysit`, or skills being read as PR guidance. The [docs index](https://code.claude.com/docs/llms.txt) doesn't have either word. The settings docs say a cloud session picks up the repo's skills from the clone, which is true, but that's not the same as saying two specific skill names get special treatment.
+**The docs.** I downloaded the [full docs](https://code.claude.com/docs/llms-full.txt) (all 9.7 MB) and searched them. "PR Steward" appears zero times, and `steward` doesn't appear in any sense that's relevant here. `babysit` shows up three times, all as a plain verb in copy like "No more babysitting a PR through six rounds of lint errors." The [cloud sessions page](https://code.claude.com/docs/en/claude-code-on-the-web) has sections on auto-fixing pull requests and on how Claude responds to PR activity. Neither mentions `SKILL.md`, `.claude/skills`, the head branch, or how proactive to be. The settings docs say a cloud session picks up the repo's skills from the clone, which is true, but that's not the same as saying two specific skill names get special treatment.
 
-**The changelog.** Nothing about either name in the [Claude Code changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) for recent releases.
+**The changelog.** The whole [Claude Code changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md), through 2.1.309, never mentions `steward` or `babysit`.
 
-**Extracted prompts.** The people at [Piebald-AI/claude-code-system-prompts](https://github.com/Piebald-AI/claude-code-system-prompts) pull Claude Code's prompts out of each release. They have a [fragment from 2.1.284](https://github.com/Piebald-AI/claude-code-system-prompts/blob/main/system-prompts/agent-prompt-pr-follow-up-cron-pr-steward-label-check.md) that tells a session not to fix or push a PR carrying a "PR Steward" watching or working label, because "PR Steward is handling this PR." Instead it should offer to leave it alone, make one change and hand back, or take over. So there's apparently a separate thing called PR Steward that labels PRs it's working on, and regular sessions are told to stay out of its way. I can't find any public description of it.
+**Extracted prompts.** The people at [Piebald-AI/claude-code-system-prompts](https://github.com/Piebald-AI/claude-code-system-prompts) pull Claude Code's prompts out of each release, and this is where PR Steward turns up. A [system prompt section from 2.1.284](https://github.com/Piebald-AI/claude-code-system-prompts/blob/main/system-prompts/system-prompt-pr-steward-handoff-guidance.md) describes it directly:
 
-**`babysit`.** The built-in `/loop` skill's own description uses "keep running /babysit-prs" as an example of something you might put on a loop. That's the only trace of the name in Claude Code itself that I've found.
+> PR Steward is a Claude agent that can watch a GitHub pull request, fix its CI and merge it.
+
+It labels PRs it's watching, and adds a second label while it's making a change. Every other session is told to check a PR's labels before pushing to it, or before starting to "babysit or monitor" it. If PR Steward has the PR, the session has to stop and offer you three choices: leave it with Steward, make one change and hand back, or take over by removing the label. If you're away, it leaves the PR alone. A [companion fragment](https://github.com/Piebald-AI/claude-code-system-prompts/blob/main/system-prompts/agent-prompt-pr-follow-up-cron-pr-steward-label-check.md) applies the same rule to scheduled PR follow-ups.
+
+So Claude Code's own prompt tells it about an Anthropic agent that merges PRs, and the public docs don't mention it at all.
+
+The `steward/SKILL.md` lookup itself isn't in those extracts. I'd guess it rides along with the PR events the server sends to a cloud session, not the CLI's built-in prompt, which would also explain why a local session never sees it.
+
+**`babysit`.** The built-in `/loop` skill's own description uses "keep running /babysit-prs" as an example of something you might put on a loop. Outside the PR Steward text, that's the only trace of the name in Claude Code that I've found.
 
 ## Other people found it too
 
@@ -61,6 +69,6 @@ At work I already have something that covers part of this. Our `pr-checks` skill
 
 ## What I'd like
 
-Just a docs section. Say that `steward` and `babysit` are read, from which branch, what they can and can't change, and what PR Steward is. Then mention it in the changelog when any of that changes.
+Just a docs section. Say that `steward` and `babysit` are read, from which branch, what they can and can't change, and what PR Steward is, including that it merges. Then mention it in the changelog when any of that changes.
 
 Until then, if you run Claude Code cloud sessions against your repos, it's worth knowing these two paths exist, and worth noticing when one shows up in a PR.
