@@ -19,7 +19,7 @@ Getting mine back took two tries. The first fix was the obvious one: set `"skill
 
 With that set, the built-in never registers and a user skill named `ship` loads like it used to. If you have your own `/ship`, that's the setting you want.
 
-That fight seemed like a good excuse to look at how much `ship` itself has changed. Since the first post it has had a little over 200 commits. Most are small, but three changes matter most: it isn't tied to Claude anymore, it reviews its own work with Codex, and it works from my phone.
+That fight seemed like a good excuse to look at how much `ship` itself has changed. Since the first post it has had a little over 200 commits. Most are small, but two changes matter most: it isn't tied to Claude anymore, and it works from my phone.
 
 ## Any harness, any model
 
@@ -38,11 +38,9 @@ Getting the other harnesses to behave like Claude took most of the work. Codex, 
 
 The most useful part of having four harnesses is the usage limit. When a session hits its limit, the watcher marks the run `Limit` and it moves to Needs you. `c` asks which harness, model and effort should continue it. Pick a different one and `ship` quits the stuck harness and starts the run again in the same worktree, picking up from what the run recorded. A Claude limit at 2pm no longer means the ticket waits until the limit resets.
 
-## Codex reviews every PR
+![The Continue dialog in ship status for a run that hit Claude's usage limit, with the harness switched to Pi and the model set to DeepSeek through OpenRouter](/assets/images/ship/ship-continue.png)
 
-I use Codex for more than running tickets. Every `ship` session now opens its PR, then runs `codex review` against the target branch, fixes what it finds, pushes, and reviews again until nothing worth fixing is left. If Codex is out of credits, the same diff goes to `claude -p` instead, and the PR description says which one reviewed it. A finding the session decides is wrong goes in the description too, so the human reviewer can see the call it made.
-
-That way a second model has read the diff before any of my teammates see the PR.
+*Demo data. A run that hit Claude's limit, about to carry on in Pi with DeepSeek. The footer shows the Claude and Codex usage and Pi's recorded spend.*
 
 ## From my phone, over Tailscale
 
@@ -75,6 +73,10 @@ This is how I want to work with these agents. A question shows up, I answer it i
 
 A few other changes worth mentioning:
 
+![The ship status kanban board, with columns for Sentry, Scheduled, Queued, Working, Needs you, In review, Ready and Done](/assets/images/ship/ship-status-board.png)
+
+*Demo data. The selected run is asking a question, which shows under the board.*
+
 - **Scheduling.** `ship --at 09:00` and `ship --every weekdays --at 09:00` run work later or on a schedule, from the CLI, the dashboard or the phone.
 - **A kanban board.** `ship status` is now columns (Sentry, Scheduled, Queued, Working, Needs you, In review, Ready, Done) instead of a table.
 - **A session limit.** Work past ten open sessions waits in a queue and starts when one closes.
@@ -85,5 +87,9 @@ A few other changes worth mentioning:
 ## Still mine
 
 Everything from the first post still applies. It's closed source, it's built around how I work, and most of these changes were worked on by `ship` sessions themselves.
+
+![Claude Code's slash command menu with /ship at the top, described as handing a BiggerPockets Jira ticket to its own unattended Claude session](/assets/images/ship/ship-slash-command.png)
+
+*My `/ship` back where it belongs, with `CLAUDE_CODE_DISABLE_SHIP` set.*
 
 The `/ship` name clash was a good reminder that when you build your own tools on someone else's platform, the platform can change under you. It took a couple of sessions and one environment variable to sort out, which is a small price for a tool that does exactly what I want.
